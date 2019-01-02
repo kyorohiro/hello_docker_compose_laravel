@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  php:
+    build: ./php
+    container_name: "laravel-php"
+    volumes:
+      - ./src:/var/www
+    ports:
+      - "8080:80"
+    privileged: true
+ 
+  mysql:
+    image: mysql:5.7
+    container_name: "laravel-mysql"
+    restart: always
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: root
+    ports: 
+      - 13306:3306
+
+  redis:
+    image: redis:alpine
+    container_name: "laravel-redis"
+    ports: 
+      - 16379:6379
